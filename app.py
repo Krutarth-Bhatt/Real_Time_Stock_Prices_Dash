@@ -67,7 +67,7 @@ def update_stocks_list(sl):
 #     print(sl)
 #     stock_l.clear()
 #     stock_l.extend(sl)
-      stock_l = sl
+    stock_l = sl
 #     print(stock_l)
     return "NA"
 
