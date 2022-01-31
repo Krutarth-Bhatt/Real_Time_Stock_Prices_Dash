@@ -44,6 +44,7 @@ app.layout = html.Div(children=[
     html.Div(id='hidden-div', style={'display':'none'}),
     dcc.Graph(
         id='live-graph',
+        animate=False
 #         animation=True
 #         figure=fig
     ),
