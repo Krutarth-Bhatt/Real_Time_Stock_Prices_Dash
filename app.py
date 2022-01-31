@@ -77,7 +77,9 @@ app.layout = html.Div(children=[
               Input('interval-component', 'n_intervals'),
               Input('stock-dropdown', 'value'))
 def update_graph_live(n, stock_l):
+    
     print("hi")
+    print(n)
     if len(stock_l) == 0:
         
         time_l.clear()
