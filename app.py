@@ -74,8 +74,8 @@ app.layout = html.Div(children=[
 
 
 @app.callback(Output('live-graph', 'figure'),
-              Input('interval-component', 'n_intervals'))
-              Input('stock-dropdown', 'value')
+              Input('interval-component', 'n_intervals'),
+              Input('stock-dropdown', 'value'))
 def update_graph_live(n, stock_l):
     print("hi")
     if len(stock_l) == 0:
