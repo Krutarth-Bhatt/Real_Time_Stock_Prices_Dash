@@ -12,6 +12,9 @@ import pytz
 app = dash.Dash(__name__)
 server = app.server
 
+app.title = "Real-Time Stock Price"
+# app._favicon = ("stocks_icon.jpeg")
+
 price_l = {}
 time_l = []
 stock_l = []
@@ -28,12 +31,14 @@ for i in range(len(tickers)):
 
 app.layout = html.Div(children=[
 
-    html.Center(html.H1(children='Real Time Stock Price Chart')),
+    html.Center(html.H1(children='Real-Time Stock Price Chart')),
 
     html.Center(html.H3(children='''
         By, Krutarth Bhatt (ASU ID: 1222317733 | Email: kmbhatt2@asu.edu)
     ''')),
-    html.Hr(),
+    html.Hr(style={'size': '3px'}),
+    html.Br(),
+    
     dcc.Dropdown(
         id='stock-dropdown',
         options=op_l,
@@ -45,32 +50,20 @@ app.layout = html.Div(children=[
     dcc.Graph(
         id='live-graph',
         animate=False
-#         animation=True
-#         figure=fig
     ),
     dcc.Interval(
             id='interval-component',
             interval=5*1000, # in milliseconds
             n_intervals=0
         ),
-    html.Center(html.H4('Know More About Me On:')),
-    html.Center(html.A('My LinkedIn Profile', href='https://www.linkedin.com/in/krutarth-bhatt/')),
-    html.Center(html.A('My Resume', href='https://drive.google.com/file/d/1iWuPcPtsPeOPJli0I41UR5U_FMP1g4Ho/view?usp=sharing')),
+    html.Hr(style={'width': '50%', 'size': '3px'}),
+    html.Br(),
+    html.Center(html.H4('Know More About Me', style={'fontStyle': 'italic'})),
+    html.Center(html.A('My LinkedIn Profile', href='https://www.linkedin.com/in/krutarth-bhatt/', target='blank')),
+    html.Center(html.A('My Resume', href='https://drive.google.com/file/d/1iWuPcPtsPeOPJli0I41UR5U_FMP1g4Ho/view?usp=sharing', target='blank')),
     
     
-])
-
-# @app.callback( Output('hidden-div', 'children'),
-# #               Input('interval-component', 'n_intervals'),
-#               Input('stock-dropdown', 'value'))
-# def update_stocks_list(sl):
-# #     print(sl)
-# #     stock_l.clear()
-# #     stock_l.extend(sl)
-#     stock_l = list(sl)
-# #     print(stock_l)
-#     return "NA"
-
+], style={'marginLeft': '5%', 'marginRight': '5%'})
 
 
 @app.callback(Output('live-graph', 'figure'),
@@ -78,8 +71,8 @@ app.layout = html.Div(children=[
               Input('stock-dropdown', 'value'))
 def update_graph_live(n, stock_l):
     
-    print("hi")
-    print(n)
+#     print("hi")
+#     print(n)
     if len(stock_l) == 0:
         
         time_l.clear()
@@ -120,7 +113,7 @@ def update_graph_live(n, stock_l):
         utc_dt = datetime.datetime.now()
         eastern = pytz.timezone('US/Eastern')
         loc_dt = utc_dt.astimezone(eastern)
-        fmt = '%H:%M:%S %Z'
+        fmt = '%H:%M:%S'
         time_l.append(loc_dt.strftime(fmt))
         
         print(len(time_l))
@@ -151,7 +144,8 @@ def update_graph_live(n, stock_l):
             ),
             yaxis=dict(
                 title="Stock Price"
-            )
+            ),
+            legend_title="Companies"
         )
         
         
@@ -161,4 +155,4 @@ def update_graph_live(n, stock_l):
         
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
