@@ -13,7 +13,7 @@ app = dash.Dash(__name__)
 server = app.server
 
 app.title = "Real-Time Stock Price"
-app._favicon = ("assets/stocks_icon.jpeg")
+app._favicon = ("stocks_icon.jpeg")
 
 price_l = {}
 time_l = []
