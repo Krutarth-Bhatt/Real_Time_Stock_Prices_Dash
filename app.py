@@ -60,23 +60,23 @@ app.layout = html.Div(children=[
     
 ])
 
-@app.callback( Output('hidden-div', 'children'),
-#               Input('interval-component', 'n_intervals'),
-              Input('stock-dropdown', 'value'))
-def update_stocks_list(sl):
-#     print(sl)
-#     stock_l.clear()
-#     stock_l.extend(sl)
-    stock_l = list(sl)
-#     print(stock_l)
-    return "NA"
+# @app.callback( Output('hidden-div', 'children'),
+# #               Input('interval-component', 'n_intervals'),
+#               Input('stock-dropdown', 'value'))
+# def update_stocks_list(sl):
+# #     print(sl)
+# #     stock_l.clear()
+# #     stock_l.extend(sl)
+#     stock_l = list(sl)
+# #     print(stock_l)
+#     return "NA"
 
 
 
 @app.callback(Output('live-graph', 'figure'),
-              Input('interval-component', 'n_intervals'))
-#               Input('stock-dropdown', 'value'))
-def update_graph_live(n):
+              Input('interval-component', 'n_intervals'),
+              Input('stock-dropdown', 'value'))
+def update_graph_live(n, stock_l):
     
     print("hi")
     print(n)
